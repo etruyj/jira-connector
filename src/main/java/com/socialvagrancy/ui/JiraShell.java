@@ -40,6 +40,9 @@ public class JiraShell {
                 //Display.print("../lib/options/version.txt");
             } else {
                 switch(aparser.getRequired("command")) {
+                    case "list-projects":
+                        output = conn.listProjects();
+                        break;
                     default:
                         System.err.println("Invalid command [" + aparser.getRequired("command") + "]. Use --help to list available options.");
                         break;

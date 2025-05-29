@@ -11,10 +11,15 @@
 package com.socialvagrancy.jiraconnector.command;
 
 import com.socialvagrancy.jiraconnector.model.JiraConfig;
+import com.socialvagrancy.jiraconnector.model.JiraProject;
+import com.socialvagrancy.jiraconnector.util.http.JiraConnector;
 import com.socialvagrancy.utils.http.RestClient;
 import com.socialvagrancy.utils.io.Configuration;
 
+import java.util.List;
+
 public class JiraController {
+    private JiraConnector jira;
     private RestClient rest_client;
 
     public JiraController() throws Exception {
@@ -23,6 +28,7 @@ public class JiraController {
             Configuration.load(configPath, JiraConfig.class);
             JiraConfig config = Configuration.get();
             rest_client = new RestClient(config.isIgnoreSsl());
+            jira = new JiraConnector(config.getUrl(), config.getEmail(), config.getApiKey(), rest_client);
         } catch(Exception e) {
             // Create a config if it doesn't exist.
             JiraConfig config = new JiraConfig();
@@ -34,5 +40,10 @@ public class JiraController {
         }
     }
 
-
+    //===========================================
+    // Commands
+    //===========================================
+    public List<JiraProject> listProjects() throws Exception {
+        return ListProjects.all(jira);
+    }
 }
