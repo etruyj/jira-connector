@@ -10,7 +10,8 @@
 
 package com.socialvagrancy.jiraconnector.ui.display.serializer;
 
-import com.socialvagrancy.jiraconnector.model.JiraProject;
+import com.socialvagrancy.jiraconnector.model.JiraIssueModel;
+import com.socialvagrancy.jiraconnector.model.JiraProjectModel;
 import com.socialvagrancy.utils.ui.structures.OutputFormat;
 
 import java.util.ArrayList;
@@ -26,7 +27,9 @@ public class Serializer {
         if(output != null && output.size() > 0) {
             if(output.get(0) instanceof String) {
                 return SerializeString.toOutputFormat(output);
-            } else if(output.get(0) instanceof JiraProject) {
+            } else if(output.get(0) instanceof JiraIssueModel) {
+                return SerializeJiraIssue.toOutputFormat(output);
+            } else if(output.get(0) instanceof JiraProjectModel) {
                 return SerializeJiraProject.toOutputFormat(output);
             } else {
                 log.debug("Unable to determine output type");

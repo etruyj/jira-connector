@@ -1,5 +1,5 @@
 //===================================================================
-// ListJiraProjects.java
+// ListJiraProjectModels.java
 //      Description:
 //          This command pulls a list of projects from Jira and returns
 //          them as a list.
@@ -12,7 +12,7 @@
 
 package com.socialvagrancy.jiraconnector.command;
 
-import com.socialvagrancy.jiraconnector.model.JiraProject;
+import com.socialvagrancy.jiraconnector.model.JiraProjectModel;
 import com.socialvagrancy.jiraconnector.util.http.JiraConnector;
 
 import java.util.ArrayList;
@@ -24,10 +24,10 @@ import org.slf4j.LoggerFactory;
 public class ListProjects { 
     private static final Logger log = LoggerFactory.getLogger(ListProjects.class);
 
-    public static List<JiraProject> all(JiraConnector jira) throws Exception {
+    public static List<JiraProjectModel> all(JiraConnector jira) throws Exception {
         log.info("Querying Jira for a list of all projects.");
 
-        List<JiraProject> projects = jira.listProjects();
+        List<JiraProjectModel> projects = jira.listProjects();
 
         if(projects == null) {
             throw new Exception("[FAILED] Failed to list Jira projects.");

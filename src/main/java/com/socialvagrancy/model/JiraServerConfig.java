@@ -9,7 +9,7 @@
 
 package com.socialvagrancy.jiraconnector.model;
 
-public class JiraConfig {
+public class JiraServerConfig {
     private String url;
     private String email;
     private String apiKey;

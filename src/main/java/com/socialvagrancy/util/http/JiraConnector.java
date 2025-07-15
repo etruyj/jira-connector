@@ -9,7 +9,9 @@
 
 package com.socialvagrancy.jiraconnector.util.http;
 
-import com.socialvagrancy.jiraconnector.model.JiraProject;
+import com.socialvagrancy.jiraconnector.model.JiraProjectModel;
+import com.socialvagrancy.jiraconnector.model.JqlSearchModel;
+import com.socialvagrancy.jiraconnector.model.JqlSearchResultsModel;
 import com.socialvagrancy.utils.http.RestClient;
 
 import java.util.Base64;
@@ -29,7 +31,11 @@ public class JiraConnector {
     //===========================================
     // Functions
     //===========================================
-    public List<JiraProject> listProjects() throws Exception {
-        return Projects.list(url, basic_auth, rest_client);
+    public JqlSearchResultsModel jqlSearch(JqlSearchModel search) throws Exception {
+        return JqlSearchRequest.query(search, url, basic_auth, rest_client);    
+    }
+
+    public List<JiraProjectModel> listProjects() throws Exception {
+        return ProjectsRequest.list(url, basic_auth, rest_client);
     }
 }

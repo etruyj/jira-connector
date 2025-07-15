@@ -10,6 +10,7 @@
 package com.socialvagrancy.jiraconnector.ui;
 
 import com.socialvagrancy.jiraconnector.command.JiraController;
+import com.socialvagrancy.jiraconnector.model.JiraConfig;
 import com.socialvagrancy.jiraconnector.ui.display.Display;
 import com.socialvagrancy.utils.io.Configuration;
 import com.socialvagrancy.utils.ui.ArgParser;
@@ -21,8 +22,13 @@ public class JiraShell {
         ArgParser aparser = new ArgParser();
         aparser.parse(args);
         
+
         try {
-            JiraController conn = new JiraController();
+            String configPath = aparser.get("config") != null ? aparser.get("config") : "../config.yml";
+            
+            Configuration.load(configPath, JiraConfig.class);
+            JiraConfig config = Configuration.get();
+            JiraController conn = new JiraController(config);
 
             processCommand(aparser, conn);
         } catch(Exception e) {
@@ -41,6 +47,13 @@ public class JiraShell {
                 //Display.print("../lib/options/version.txt");
             } else {
                 switch(aparser.getRequired("command")) {
+                    case "list-issues":
+                        output = conn.listIssues(aparser.get("project"),
+                                                aparser.get("page-length"),
+                                                aparser.get("start-date"),
+                                                aparser.get("status"),
+                                                aparser.get("status-category"));
+                        break;
                     case "list-projects":
                         output = conn.listProjects();
                         break;

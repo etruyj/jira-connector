@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Display {
     public static void output(List toPrint, String outputFormat) {
-        String format = outputFormat != null ? outputFormat : "shell";
+        String format = outputFormat != null ? outputFormat : "table";
     
         List<OutputFormat> print = Serializer.toOutputFormat(toPrint);
 
