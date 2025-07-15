@@ -10,9 +10,12 @@
 package com.socialvagrancy.jiraconnector.util.http;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import com.socialvagrancy.jiraconnector.model.JiraIssueFieldsModel;
 import com.socialvagrancy.jiraconnector.model.JqlSearchResultsModel;
 import com.socialvagrancy.jiraconnector.model.JqlSearchModel;
+import com.socialvagrancy.jiraconnector.util.gson.typeadapter.JiraIssueFieldsModelDeserializer;
 import com.socialvagrancy.utils.http.RestClient;
 
 import org.apache.http.HttpResponse;
@@ -23,7 +26,9 @@ import org.slf4j.LoggerFactory;
 
 public class JqlSearchRequest {
     private static final Logger log = LoggerFactory.getLogger(JqlSearchRequest.class);
-    private static final Gson gson = new Gson();
+    private static final Gson gson = new GsonBuilder()
+                                            .registerTypeAdapter(JiraIssueFieldsModel.class, new JiraIssueFieldsModelDeserializer())
+                                            .create();
 
     public static JqlSearchResultsModel query(JqlSearchModel search, String baseUrl, String basicAuth, RestClient api) throws Exception {
         String apiCall = JiraApiUrls.jqlSearch(baseUrl);

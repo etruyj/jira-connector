@@ -10,6 +10,7 @@ package com.socialvagrancy.jiraconnector.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.time.LocalDate;
+import java.util.Map;
 
 public class JiraIssueFieldsModel {
     String summary;
@@ -18,11 +19,8 @@ public class JiraIssueFieldsModel {
     JiraIssueType issuetype;
     JiraStatus status;
     DocumentText description;
-    @SerializedName("customfield_10015")
-    String customfield10015; // custom field for issue start date in our Jira instance
-    @SerializedName("customfield_10113")
-    String customfield10113; // Company name
     String duedate;
+    Map<String, Object> customFields;
 
     public JiraIssueFieldsModel() {}
 
@@ -46,8 +44,7 @@ public class JiraIssueFieldsModel {
         return LocalDate.parse(duedate); 
     }
     public String getDueDateString() { return duedate; }
-    public String getStartDate() { return customfield10015; }
-    public String getCustomfield10113() { return customfield10113; } // company name
+    public Map<String, Object> getCustomFields() { return customFields; }
 
     //===========================================
     // Setters
@@ -61,8 +58,5 @@ public class JiraIssueFieldsModel {
     public void setDescription(DocumentText desc) { this.description = desc; }
     public void setDueDate(String date) { this.duedate = date; }
     public void setDueDate(LocalDate date) { this.duedate = date.toString(); } 
-    public void setCustomfield10015(String value) { this.customfield10015 = value; }
-    public void setCustomfield10113(String company) { this.customfield10113 = company; }
-    public void setStartDate(String date) { this.customfield10015 = date; }
-    public void setStartDate(LocalDate date) { this.customfield10015 = date.toString(); }
+    public void setCustomFields(Map<String, Object> custom_fields) { this.customFields = custom_fields; }
 }
