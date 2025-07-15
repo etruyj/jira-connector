@@ -18,7 +18,11 @@ import com.socialvagrancy.utils.io.Configuration;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class JiraController {
+    private static final Logger log = LoggerFactory.getLogger(JiraConnector.class);
     private JiraConnector jira;
     private RestClient rest_client;
 
@@ -31,12 +35,13 @@ public class JiraController {
             jira = new JiraConnector(config.getUrl(), config.getEmail(), config.getApiKey(), rest_client);
         } catch(Exception e) {
             // Create a config if it doesn't exist.
+            log.error(e.getMessage());
             JiraConfig config = new JiraConfig();
             config.setEmail("user@example.com");
             config.setApiKey("abcdefghijklmnop");
             config.setIgnoreSsl(false);
 
-            Configuration.create(configPath, config, JiraConfig.class);
+            //Configuration.create(configPath, config, JiraConfig.class);
         }
     }
 

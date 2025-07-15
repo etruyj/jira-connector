@@ -10,6 +10,7 @@
 package com.socialvagrancy.jiraconnector.ui;
 
 import com.socialvagrancy.jiraconnector.command.JiraController;
+import com.socialvagrancy.jiraconnector.ui.display.Display;
 import com.socialvagrancy.utils.io.Configuration;
 import com.socialvagrancy.utils.ui.ArgParser;
 
@@ -49,7 +50,7 @@ public class JiraShell {
                 }
 
                 if(output != null) {
-                    //Display.output(output, aparser.get("output-format") != null ? aparser.get("output-format") : outputFormat);
+                    Display.output(output, aparser.get("output-format"));
                 }   
             }
         } catch(Exception e) {

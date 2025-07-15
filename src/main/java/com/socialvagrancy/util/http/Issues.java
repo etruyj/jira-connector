@@ -45,7 +45,7 @@ public class Issues {
         }
     }
 
-    public static JiraIssue getIssue(String url, String issue_id, String basic_auth, RestClient rest_client) throws Exception {
+    public static JiraIssue get(String url, String issue_id, String basic_auth, RestClient rest_client) throws Exception {
         Gson gson = new Gson();
 
         String api_call = JiraApiUrls.issue(url, issue_id);

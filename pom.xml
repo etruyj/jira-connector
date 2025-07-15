@@ -115,7 +115,7 @@
                       <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                       <addClasspath>true</addClasspath>
                       <classpathPrefix>../lib</classpathPrefix>
-                      <mainClass>com.spectralogic.storcycle.analyzer.ui.SSCSAShell</mainClass>
+                      <mainClass>com.socialvagrancy.jiraconnector.ui.JiraShell</mainClass>
                   </manifest>
                 </archive>
             </configuration>
