@@ -47,6 +47,11 @@ public class JiraShell {
                 //Display.print("../lib/options/version.txt");
             } else {
                 switch(aparser.getRequired("command")) {
+                    case "jql-search":
+                        output = conn.jqlSearch(aparser.getRequired("jql"),
+                                                aparser.get("page-length"),
+                                                aparser.get("page"));
+                        break;
                     case "list-issues":
                         output = conn.listIssues(aparser.get("project"),
                                                 aparser.get("page-length"),
