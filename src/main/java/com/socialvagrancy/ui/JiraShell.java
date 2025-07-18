@@ -18,13 +18,15 @@ import com.socialvagrancy.utils.ui.ArgParser;
 import java.util.List;
 
 public class JiraShell {
+    public static String configPath;
+    
     public static void main(String[] args) {
         ArgParser aparser = new ArgParser();
         aparser.parse(args);
         
 
         try {
-            String configPath = aparser.get("config") != null ? aparser.get("config") : "../config.yml";
+            configPath = aparser.get("config") != null ? aparser.get("config") : "../config.yml";
             
             Configuration.load(configPath, JiraConfig.class);
             JiraConfig config = Configuration.get();
@@ -61,6 +63,11 @@ public class JiraShell {
                         break;
                     case "list-projects":
                         output = conn.listProjects();
+                        break;
+                    case "update-customfields":
+                        conn.updateJiraConfigCustomfields(aparser.get("project"),
+                                aparser.get("page-length"),
+                                configPath);
                         break;
                     default:
                         System.err.println("Invalid command [" + aparser.getRequired("command") + "]. Use --help to list available options.");

@@ -16,7 +16,7 @@ public class JiraConfig {
     private JiraServerConfig server;
     private String defaultProject;
     private Integer pageLength;
-    private Map<String, String> customFieldsMap;
+    private Map<String, String> customfieldsMap;
     private List<String> issueFields;
 
     //===========================================
@@ -25,7 +25,7 @@ public class JiraConfig {
     public JiraServerConfig getServer() { return server; }
     public String getDefaultProject() { return defaultProject; }
     public Integer getPageLength() { return pageLength; }
-    public Map<String, String> getCustomFieldsMap() { return customFieldsMap; }
+    public Map<String, String> getCustomfieldsMap() { return customfieldsMap; }
     public List<String> getIssueFields() { return issueFields; }
 
     //===========================================
@@ -34,6 +34,6 @@ public class JiraConfig {
     public void setServer(JiraServerConfig server) { this.server = server; }
     public void setDefaultProject(String project) { this.defaultProject = project; }
     public void setPageLength(Integer length) { this.pageLength = length; }
-    public void setCustomFieldsMap(Map<String, String> map) { this.customFieldsMap = map; }
+    public void setCustomfieldsMap(Map<String, String> map) { this.customfieldsMap = map; }
     public void setIssueFields(List<String> fields) { this.issueFields = fields; }
 }

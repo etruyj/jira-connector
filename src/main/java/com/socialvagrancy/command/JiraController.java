@@ -57,11 +57,20 @@ public class JiraController {
     //===========================================
     // Commands
     //===========================================
+    public JiraConfig fetchCustomfieldsConfig(String project, String page_length) throws Exception {
+        String projectKey = project != null ? project : config.getDefaultProject();
+        int pageLength = config.getPageLength() != null ? config.getPageLength() : 100;
+        pageLength = page_length != null ? Integer.valueOf(page_length) : pageLength;
+    
+        return FetchCustomfields.updateConfig(config, projectKey, pageLength, jira);
+    }
+
+
     public List<JiraIssueModel> jqlSearch(String jql, String page_length, String page) throws Exception {
         int pageLength = config.getPageLength() != null ? config.getPageLength() : 100;
         pageLength = page_length != null ? Integer.valueOf(page_length) : pageLength;
     
-        return ListIssues.jqlSearch(jql, pageLength, page, jira);
+        return ListIssues.jqlIssueSearch(jql, pageLength, page, jira);
     }
 
     public List<JiraIssueModel> listIssues(String project, String page_length, String startDate, String status, String statusCategory) throws Exception {
@@ -69,11 +78,18 @@ public class JiraController {
         String projectKey = project != null ? project : config.getDefaultProject();
         int pageLength = config.getPageLength() != null ? config.getPageLength() : 100;
         pageLength = page_length != null ? Integer.valueOf(page_length) : pageLength;
-    
-        return ListIssues.forProject(projectKey, status, statusCategory, startDate, pageLength, jira);
+        String startDateField = config.getCustomfieldsMap().get("start date");
+
+        return ListIssues.forProject(projectKey, status, statusCategory, startDateField, startDate, pageLength, jira);
     }
 
     public List<JiraProjectModel> listProjects() throws Exception {
         return ListProjects.all(jira);
+    }
+
+    public void updateJiraConfigCustomfields(String project, String page_length, String configPath) throws Exception {
+        config = fetchCustomfieldsConfig(project, page_length);
+
+        Configuration.create(configPath, config, JiraConfig.class);
     }
 }

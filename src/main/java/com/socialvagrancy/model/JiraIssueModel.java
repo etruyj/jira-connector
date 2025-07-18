@@ -8,7 +8,7 @@ package com.socialvagrancy.jiraconnector.model;
 
 import java.time.LocalDate;
 
-public class JiraIssueModel {
+public class JiraIssueModel { 
     String expand;
     String id;
     String self;
